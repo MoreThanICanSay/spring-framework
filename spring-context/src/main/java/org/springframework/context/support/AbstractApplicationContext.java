@@ -622,7 +622,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void prepareRefresh() {
 		// Switch to active.
+		// 容器开始时间
 		this.startupDate = System.currentTimeMillis();
+		// 容器状态
 		this.closed.set(false);
 		this.active.set(true);
 
@@ -636,13 +638,17 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
+		// 空方法 留给子类去实现 去加载一下 额外的配置属性
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		// 校验属性，校验环境属性和环境变量
+		// 校验属性的合法性 判断 value 是否为 null
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
+		// 加载一个空的监听器（空的集合）
 		if (this.earlyApplicationListeners == null) {
 			this.earlyApplicationListeners = new LinkedHashSet<>(this.applicationListeners);
 		}
@@ -654,6 +660,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Allow for the collection of early ApplicationEvents,
 		// to be published once the multicaster is available...
+		// 初始化 早期事件
 		this.earlyApplicationEvents = new LinkedHashSet<>();
 	}
 
