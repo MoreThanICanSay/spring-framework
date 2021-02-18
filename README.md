@@ -10,3 +10,7 @@
 [Spring官方文档中文版](https://www.springcloud.cc/spring-reference.html)
 
 [Spring Framework](https://spring.io/projects/spring-framework)
+
+简单来说Bean的生命周期：
+
+![Bean](https://github.com/MoreThanICanSay/image/blob/master/bean.jpg)
