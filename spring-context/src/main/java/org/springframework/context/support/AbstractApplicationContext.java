@@ -682,6 +682,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
 		// 调用的是 AbstractRefreshableApplicationContext#refreshBeanFactory
+		// 调用父类方法
 		refreshBeanFactory();
 		return getBeanFactory();
 	}
