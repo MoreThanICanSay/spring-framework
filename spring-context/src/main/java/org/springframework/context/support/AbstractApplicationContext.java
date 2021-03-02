@@ -189,6 +189,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	/**
+	 * 创建上下文的唯一值
 	 * Unique id for this context, if any.
 	 */
 	private String id = ObjectUtils.identityToString(this);
@@ -232,6 +233,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	/**
 	 * Synchronization monitor for the "refresh" and "destroy".
+	 * 调用refresh锁
 	 */
 	private final Object startupShutdownMonitor = new Object();
 
@@ -291,6 +293,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Create a new AbstractApplicationContext with no parent.
 	 */
 	public AbstractApplicationContext() {
+		// 创建资源处理器
 		this.resourcePatternResolver = getResourcePatternResolver();
 	}
 
@@ -300,6 +303,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param parent the parent context
 	 */
 	public AbstractApplicationContext(@Nullable ApplicationContext parent) {
+		// 当前对象创建出一些初始化变量
 		this();
 		setParent(parent);
 	}
@@ -539,6 +543,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
 	 */
 	protected ResourcePatternResolver getResourcePatternResolver() {
+		// 创建一个资源模式解析器（解析xml文件）
 		return new PathMatchingResourcePatternResolver(this);
 	}
 
@@ -559,6 +564,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Override
 	public void setParent(@Nullable ApplicationContext parent) {
 		this.parent = parent;
+		// spring 里面的父容器是空的
+		// Spring mvc 里面父容器有数据
 		if (parent != null) {
 			Environment parentEnvironment = parent.getEnvironment();
 			if (parentEnvironment instanceof ConfigurableEnvironment) {
